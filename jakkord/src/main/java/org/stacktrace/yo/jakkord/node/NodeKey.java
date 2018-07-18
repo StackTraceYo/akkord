@@ -26,4 +26,11 @@ public class NodeKey implements Serializable {
         }
     }
 
+    public InetAddress getIp() {
+        return myIp;
+    }
+
+    public String getHash() {
+        return myHash;
+    }
 }
