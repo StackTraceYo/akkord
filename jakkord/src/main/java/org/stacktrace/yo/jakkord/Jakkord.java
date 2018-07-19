@@ -1,14 +1,22 @@
 package org.stacktrace.yo.jakkord;
 
-import com.google.common.net.InetAddresses;
 import org.stacktrace.yo.jakkord.network.Network;
-
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.util.Enumeration;
+import org.stacktrace.yo.jakkord.node.Node;
+import org.stacktrace.yo.jakkord.protocol.ChordProtocol;
 
 public class Jakkord {
+
+    private Node myNode;
+
+
+    public Jakkord create(Node node) {
+        return this;
+    }
+
+    public Jakkord join(ChordProtocol.NodeProps node) {
+        return this;
+    }
+
 
     public static void main(String args[]) {
         // start server

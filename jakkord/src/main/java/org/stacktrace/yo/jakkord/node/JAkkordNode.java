@@ -7,7 +7,7 @@ import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 
-public class JAkkordNode implements Node {
+public class JAkkordNode {
 
     private final NodeKey myKey;
     private final InetAddress myAddress;
@@ -26,10 +26,5 @@ public class JAkkordNode implements Node {
 
     public InetAddress getAddress() {
         return myAddress;
-    }
-
-    @Override
-    public Node join(Node newNode) {
-        return this;
     }
 }
