@@ -1,4 +1,4 @@
-package org.stacktrace.yo.jakkord.network;
+package org.stacktrace.yo.jakkord.util.network;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
