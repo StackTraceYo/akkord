@@ -5,6 +5,7 @@ import org.stacktrace.yo.jakkord.util.hash.Hash;
 
 import java.io.Serializable;
 import java.net.InetAddress;
+import java.util.Objects;
 
 public class NodeKey implements Serializable {
 
@@ -22,7 +23,7 @@ public class NodeKey implements Serializable {
             myIp = InetAddresses.forString(ip);
             myHash = Hash.hash(myIp);
         } else {
-            throw new IllegalArgumentException("String provided is not an acceptable IPAddress: " + ip);
+            throw new IllegalArgumentException("provided string is not an acceptable IPAddress: " + ip);
         }
     }
 
@@ -33,4 +34,20 @@ public class NodeKey implements Serializable {
     public Long getHash() {
         return myHash;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NodeKey nodeKey = (NodeKey) o;
+        return myHash == nodeKey.myHash &&
+                Objects.equals(myIp, nodeKey.myIp);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(myIp, myHash);
+    }
+
 }

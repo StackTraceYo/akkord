@@ -1,17 +1,15 @@
 package org.stacktrace.yo.jakkord.node;
 
-import org.stacktrace.yo.jakkord.protocol.ChordProtocol.NodeProps;
-
 public interface Node {
 
-    NodeProps join(NodeProps newNode);
+    String join(String newNode);
 
-    NodeProps notify(NodeProps successor);
+    String notify(String successor);
 
-    NodeProps pNotify(NodeProps predecessor);
+    String pNotify(String predecessor);
 
-    NodeProps findSuccessor();
+    String findSuccessor();
 
-    NodeProps findPredecessor();
+    String findPredecessor();
 
 }

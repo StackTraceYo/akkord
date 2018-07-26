@@ -40,10 +40,6 @@ public class Hash {
         return Hashing.concatenating(Arrays.asList(hashFunctions));
     }
 
-    public static HashFunction fixed_murmur3_128() {
-        return murmur3_128(SEED);
-    }
-
     public static HashFunction murmur3_128(int seed) {
         return Hashing.murmur3_128(seed);
     }
@@ -54,5 +50,9 @@ public class Hash {
 
     public static HashFunction fixed_murmur3_32() {
         return murmur3_32(SEED);
+    }
+
+    public static HashFunction fixed_murmur3_128() {
+        return murmur3_128(SEED);
     }
 }
