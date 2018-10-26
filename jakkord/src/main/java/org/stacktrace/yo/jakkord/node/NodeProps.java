@@ -7,17 +7,17 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.util.Objects;
 
-public class NodeKey implements Serializable {
+public class NodeProps implements Serializable {
 
     private final InetAddress myIp;
     private final long myHash;
 
-    public NodeKey(InetAddress ip) {
+    public NodeProps(InetAddress ip) {
         myIp = ip;
         myHash = Hash.hash(myIp);
     }
 
-    public NodeKey(String ip) {
+    public NodeProps(String ip) {
         boolean isAddress = InetAddresses.isInetAddress(ip);
         if (isAddress) {
             myIp = InetAddresses.forString(ip);
@@ -39,14 +39,13 @@ public class NodeKey implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        NodeKey nodeKey = (NodeKey) o;
-        return myHash == nodeKey.myHash &&
-                Objects.equals(myIp, nodeKey.myIp);
+        NodeProps nodeProps = (NodeProps) o;
+        return myHash == nodeProps.myHash &&
+                Objects.equals(myIp, nodeProps.myIp);
     }
 
     @Override
     public int hashCode() {
-
         return Objects.hash(myIp, myHash);
     }
 

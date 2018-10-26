@@ -9,23 +9,29 @@ import java.net.InetAddress;
 import java.util.List;
 import java.util.Map;
 
-public class JAkkordNode {
+public class AkkordNode {
 
-    private final NodeKey myKey;
+    private final NodeProps myKey;
     private final InetAddress myAddress;
-    private final Map<Integer, NodeKey> myFingerTable = Maps.newHashMap();
-    private final List<NodeKey> mySuccessors = Lists.newArrayList();
-    private NodeKey myPredecessor;
+    private final Map<Integer, NodeProps> myFingerTable;
+    private final List<NodeProps> mySuccessors = Lists.newArrayList();
+    private NodeProps myPredecessor;
     private Range<Long> myRange;
 
-    public JAkkordNode(InetAddress address) {
+    public AkkordNode(InetAddress address) {
         myAddress = address;
-        myKey = new NodeKey(myAddress);
+        myKey = new NodeProps(myAddress);
         myPredecessor = myKey;
         myRange = createRange(myKey, myKey);
+        myFingerTable = initFingerTable();
+
     }
 
-    private Range<Long> createRange(NodeKey from, NodeKey to) {
+    private Map<Integer, NodeProps> initFingerTable() {
+        return Maps.newLinkedHashMap();
+    }
+
+    private Range<Long> createRange(NodeProps from, NodeProps to) {
         return createRange(from.getHash(), to.getHash());
     }
 
@@ -33,31 +39,31 @@ public class JAkkordNode {
         return Range.range(from, BoundType.OPEN, to, BoundType.CLOSED);
     }
 
-    public boolean join(NodeKey nodeKey) {
-        if (!nodeKey.equals(myKey)) {
+    public boolean join(NodeProps nodeProps) {
+        if (!nodeProps.equals(myKey)) {
             return false;
         }
         return false;
     }
 
-    public NodeKey findSuccessor(NodeKey nodeKey) {
-        if(inRange(nodeKey)){
+    public NodeProps findSuccessor(NodeProps nodeProps) {
+        if (inRange(nodeProps)) {
             return getSuccessor();
-        }else{
+        } else {
             //ask successor
             return getSuccessor();
         }
     }
 
-    private boolean inRange(NodeKey nodeKey) {
-        return myRange.contains(nodeKey.getHash());
+    private boolean inRange(NodeProps nodeProps) {
+        return myRange.contains(nodeProps.getHash());
     }
 
-    public NodeKey getSuccessor() {
+    public NodeProps getSuccessor() {
         return myFingerTable.get(1);
     }
 
-    public NodeKey getKey() {
+    public NodeProps getKey() {
         return myKey;
     }
 
