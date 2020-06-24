@@ -23,7 +23,7 @@ public class NodeKey implements Serializable {
             myIp = InetAddresses.forString(ip);
             myHash = Hash.hash(myIp);
         } else {
-            throw new IllegalArgumentException("provided string is not an acceptable IPAddress: " + ip);
+            throw new IllegalArgumentException("Provided string is not an acceptable IPAddress: " + ip);
         }
     }
 
@@ -46,7 +46,6 @@ public class NodeKey implements Serializable {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(myIp, myHash);
     }
 
